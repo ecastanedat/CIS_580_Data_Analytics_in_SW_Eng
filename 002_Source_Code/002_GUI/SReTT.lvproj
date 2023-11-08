@@ -116,7 +116,7 @@
 				<Property Name="Bld_localDestDirType" Type="Str">relativeToProject</Property>
 				<Property Name="Bld_modifyLibraryFile" Type="Bool">true</Property>
 				<Property Name="Bld_previewCacheID" Type="Str">{1F3981CA-D98A-4A5A-AFA5-75C30A02715B}</Property>
-				<Property Name="Bld_version.build" Type="Int">23</Property>
+				<Property Name="Bld_version.build" Type="Int">25</Property>
 				<Property Name="Bld_version.major" Type="Int">1</Property>
 				<Property Name="Destination[0].destName" Type="Str">SReTT.exe</Property>
 				<Property Name="Destination[0].path" Type="Path">../001_Builds/NI_AB_PROJECTNAME/SReTT.exe</Property>
