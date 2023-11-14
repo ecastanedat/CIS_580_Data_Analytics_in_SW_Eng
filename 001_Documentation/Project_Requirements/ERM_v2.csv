@@ -1,0 +1,88 @@
+ID,SW Requirements,c_This_is_a,c_Maturity,c_Review_Comment,c_SIL
+SWR_ERM_1,1 Introduction,heading,N/A,,N/A
+SWR_ERM_2,"1.0-1 <General notes: 1. All texts in <> brackets are template advises and shall be deleted after document completion. 2. Directly after deriving the requirements or any other information from the Customer Specifications  any other Stakeholder Documents or System Specification the ""Satisfies"" links to sources shall be drawn. If the sources are not in DOORS  then the ""c_Source"" attribute shall be used as reference storage.> ",comment,N/A,,N/A
+SWR_ERM_3,1.1 Purpose,heading,N/A,,N/A
+SWR_ERM_4,1.1.0-1 <What is the purpose of this document?> This document contains the SW specific requirements for the <name> for the <ProjectName> project. Intended readers of this document are all people involved in development of the SW <name> mainly the requirements engineers  architects  developers and testers.,comment,N/A,,N/A
+SWR_ERM_5,1.2 Scope,heading,N/A,,N/A
+SWR_ERM_6,1.2.0-1 This document describes the SW <name> as a black box.,comment,N/A,,N/A
+SWR_ERM_7,1.3 Glossary,heading,N/A,,N/A
+SWR_ERM_8,1.3.0-1 <The reference to the B&S Glossary shall be inserted here. All terms and abbreviations not described in the B&S Glossary but used in this context  shall be listed here.>,comment,N/A,,N/A
+SWR_ERM_9,1.4 References,heading,N/A,,N/A
+SWR_ERM_10,1.4.0-1  <What are the documents referenced? What are the sources of information in this document?> [1] CAP0500035 Requirements Engineering Method [2] CAP0500036 SY/SW Architecture Method [3] Datasheet (to avoid duplication of information  eg: counting number of pins)  ...,comment,N/A,,N/A
+SWR_ERM_11,1.5 Disclosure,heading,N/A,,N/A
+SWR_ERM_12,1.5.0-1 The reproduction  distribution and utilization of this document as well as the communication of its contents to others without express authorization is prohibited. Offenders will be held liable for the payment of damages. All rights reserved in the event of the grant of a patent  utility model or design.,comment,N/A,,N/A
+SWR_ERM_13,2 Functions,heading,N/A,,N/A
+SWR_ERM_14,2.0-1 <This chapter shall contain the functional SW requirements grouped by functions. The requirements shall be based on the signals  events  symbols  defined in the architecture. >,comment,N/A,,N/A
+SWR_ERM_15,2.1 FSM_Error_Reaction_Manager,heading,N/A,,N/A
+SWR_ERM_18,2.1.1 Fault Reaction for Micro Faults Inputs,heading,N/A,,N/A
+SWR_ERM_46,2.1.1.0-1 The fault Reaction for Recoverable Micro Faults shall be force a microcontroller reset.,functional_requirement,project_accepted, ,ASIL A
+SWR_ERM_47,2.1.1.0-2 Implementation Hint: For each micro related fault the error reaction manager shall store a fault bit.,comment,N/A,,N/A
+SWR_ERM_48,2.1.1.0-3 Implementation Hint: There will be 3 types of FSM Error Reactions:  REACTION_RECOVERABLE  REACTION_RECOVERABLE_SWP_RESET and REACTION_RECOVERABLE_NO_RESET.  Error reaction fault bits shall be protected and shall be declared in non initialized RAM.  These fault bits must be protected by FFI inverse RAM implementation. ,comment,N/A,,N/A
+SWR_ERM_50,2.1.1.0-4 Implementation Hint: Error Reaction Manager shall keep a Fault bit and history counter for each type of error (i.e ECC RAM  ECC ROM  TASK MONITOR  REGISTER MONITOR  STACK MONITOR  etc.)  Fault bit stored on FSM_Error_Reaction_NonInitRAM_Error. Fault history counter stored on FSM_Error_Reaction_NonInitRAM_Error_History_Count.,comment,N/A,,N/A
+SWR_ERM_92,2.1.1.0-5 FSM modules shall set any of the following fault bits using the interface provided by FSM_Error_Reaction_Manager:  FSM_Set_Error_Reaction(),architectural_element,project_accepted,,ASIL A
+SWR_ERM_97,2.1.1.0-6 FSM modules shall clear any of the Micro Faults bits of type REACTION_RECOVERABLE_NO_RESET using the interface provided by FSM_Error_Reaction_Manager:  FSM_Clear_Error_Reaction_Recoverable_No_Reset(),architectural_element,project_accepted,,ASIL A
+SWR_ERM_51,2.1.1.0-7 The Error reaction component will set a fault bit on FSM_Error_Reaction_NonInitRAM_Error if any ECC error is present.  Note: ECC error includes DATA_FLASH_ERROR  PROGRAM_FLASH_ERROR  RAM ERROR and PERIPHERAL_RAM_ERROR.,functional_requirement,project_accepted, ,ASIL A
+SWR_ERM_86,2.1.1.0-8 The Error reaction component will set a fault bit on FSM_Error_Reaction_NonInitRAM_Error if any register monitor error is present.  Note: Register monitor error includes STACK_ERROR  SYSREG_ERROR  SAFETYREG_ERROR and IO_REG_ERROR.,functional_requirement,project_accepted,,ASIL A
+SWR_ERM_88,2.1.1.0-9 The Error reaction component will set a fault bit on FSM_Error_Reaction_NonInitRAM_Error if a clock error or PLL error is present. ,functional_requirement,project_accepted,,ASIL A
+SWR_ERM_52,2.1.1.0-10 The Error reaction component will set a fault bit on FSM_Error_Reaction_NonInitRAM_Error if the PTM went into the Safe State due to unintended latch opening on speed (when VehSpdAvgDrvn is greather than Rte_ConfigParam_APPSW_UserSwLogic_StationarySpeed_Prm).,functional_requirement,project_accepted, ,ASIL A
+SWR_ERM_73,2.1.1.0-11 The Error reaction component will set a fault bit on FSM_Error_Reaction_NonInitRAM_Error if the PTM went into the Safe State due to obstacle pinch detection.,functional_requirement,project_accepted, ,ASIL A
+SWR_ERM_76,2.1.1.0-12 The Error reaction component will set a COMM fault bit on FSM_Error_Reaction_NonInitRAM_Error if a CAN loss of communication / alive rolling count error is present on any of the following signals:  VehSpdAvgDrvn  BkupSysPwrMode  SysPwrMode  PwrRrClsrMtnReqr or PwrRrClsrMtnCmd,functional_requirement,project_accepted, ,ASIL A
+SWR_ERM_75,2.1.1.0-13 The Error reaction component will set a COMM fault bit on FSM_Error_Reaction_NonInitRAM_Error if a CAN communication Signal out of range error is present on any of the following signals:  VehSpdAvgDrvn  BkupSysPwrMode  SysPwrMode  PwrRrClsrMtnReqr or PwrRrClsrMtnCmd,functional_requirement,project_accepted, ,ASIL A
+SWR_ERM_77,2.1.1.0-14 The Error reaction component will set a COMM fault bit on FSM_Error_Reaction_NonInitRAM_Error if a MAC/Checksum error is present on any of the following signals:  VehSpdAvgDrvn  BkupSysPwrMode  SysPwrMode  PwrRrClsrMtnReqr or PwrRrClsrMtnCmd,functional_requirement,project_accepted,,ASIL A
+SWR_ERM_78,2.1.1.0-15 The Error reaction component will set a COMM fault bit on FSM_Error_Reaction_NonInitRAM_Error if a signal validity error is present on any of the following signals:  VehSpdAvgDrvn  BkupSysPwrMode  SysPwrMode  PwrRrClsrMtnReqr or PwrRrClsrMtnCmd,functional_requirement,project_accepted,,ASIL A
+SWR_ERM_74,2.1.1.0-16 The Error reaction component will set a fault bit on FSM_Error_Reaction_NonInitRAM_Error if a voltage range error is detected. ,functional_requirement,project_accepted,,ASIL A
+SWR_ERM_93,2.1.2 FSM_Error_Reaction_Manager Logic,heading,N/A,,N/A
+SWR_ERM_119,2.1.2.0-1 On intialization  Error Reaction Manager shall get the error stored on FSM_Error_Reaction_NonInitRAM_Error.,functional_requirement,project_accepted,,ASIL A
+SWR_ERM_120,2.1.2.0-2 On initialization  Error Reaction Manager shall determine if the reset was caused by either Clocks or PLL via interface:  FS_Clock_PLL_Reset_Determination()  Note: Corresponding error bit shall be set by the FSM component for Clock_PLL_Error,architectural_element,project_accepted,,ASIL A
+SWR_ERM_121,2.1.2.0-3 Each time an error is received  Error Reaction Manager shall obtain the errors already stored on FSM_Error_Reaction_NonInitRam_Error before it stores the received error.,functional_requirement,project_accepted,,ASIL A
+SWR_ERM_122,2.1.2.0-4 Each time an error is received  Error Reaction Manager shall write the history counters to NvM and notify NvM_Supervisor that a write to NvM for Error Reaction History Counters block shall be performed.,functional_requirement,project_accepted,,ASIL A
+SWR_ERM_123,2.1.2.0-5 Once a received error is stored on FSM_Error_Reaction_NonInitRam_Error  Error Reaction Manager shall also update the errors stored on NvM Shadow RAM with the received error.,functional_requirement,project_accepted,,ASIL A
+SWR_ERM_124,2.1.2.0-6 Once a received error is stored on NvM Shadow RAM  Error Reaction Manager shall write the errors on NvM Shadow RAM to NvM and notify NvM_Supervisor that a write to NvM for Error Reaction Error Bits block shall be performed.,functional_requirement,project_accepted,,ASIL A
+SWR_ERM_54,2.1.2.0-7 Every error bit has its own history counter. Each time an ERROR occurs for FSM_Error_Reaction_NonInitRAM_Error_History_Count for that type of error  it shall be incremented in both non-initialized RAM and NvM Shadow RAM.  Note: The history counter is used to determine the frequency of a FSM error. ,functional_requirement,project_accepted, ,ASIL A
+SWR_ERM_89,2.1.2.0-8 FSM_Error_Reaction_NonInitRAM_Error_History_Count shall only be incremented and max out never cleared in NVM when error reaction is processed.   ,functional_requirement,project_accepted,,ASIL A
+SWR_ERM_118,2.1.2.0-9 Whenever an error history counter is increased  a counter on shadow RAM shall also be increased and stored on NvM.,functional_requirement,project_accepted,,ASIL A
+SWR_ERM_103,2.1.2.1 Non Init RAM header pattern check,heading,N/A, ,N/A
+SWR_ERM_104,2.1.2.1.0-1 Error Reaction Manager stores a Non Init Ram pattern check value variable which shall be equal to 0xAA55CC33U  otherwise  Non Init RAM is considered as corrupted. ,reference,N/A,,N/A
+SWR_ERM_105,2.1.2.1.0-2 Each time that an Error Reaction Manager operation tries to get the error stored on FSM_Error_Reaction_NonInitRAM_Error   a RAM Header pattern check shall be performed to identify if RAM is corrupted.,functional_requirement,project_accepted,,ASIL A
+SWR_ERM_106,2.1.2.1.0-3 When corrupted RAM is detected from header pattern check  Non Init Ram pattern check variable shall be set to correct Non Init RAM header pattern.  Note: Refer to SWR_ERM_104 to correct Non Init RAM header pattern value.,functional_requirement,project_accepted,,ASIL A
+SWR_ERM_107,2.1.2.1.0-4 When corrupted RAM is detected from header pattern check  error stored on FSM_Error_Reaction_NonInitRAM_Error shall be set to 0.,functional_requirement,project_accepted,,ASIL A
+SWR_ERM_108,2.1.2.1.0-5 When corrupted RAM is detected from header pattern check  error history counters shall be reset to 0.,functional_requirement,project_accepted,,ASIL A
+SWR_ERM_109,2.1.2.1.0-6 When corrupted RAM is detected from header pattern check  Nvm_Supervisor shall be notified to reset the commit status of all NvM FSM block via interface:  ReinitializeNVMCommitStatus(),architectural_element,project_accepted,,ASIL A
+SWR_ERM_110,2.1.2.1.0-7 When corrupted RAM is detected from header pattern check  command arbitration information from Safety Arbitrator shall be reset via interface:  FsmSafetyGuardF_Reinitialize_Ghost_Driver_Commmand_Arbitration_Info(),architectural_element,project_accepted,,ASIL A
+SWR_ERM_55,2.1.2.2 Error reaction when PTM recovers from reset,heading,N/A, ,N/A
+SWR_ERM_49,2.1.2.2.0-1 During the initialization the error reaction will perform a fault check to verify if there is any error bit set on FSM_Error_Reaction_NonInitRAM_Error from the previous RESET cycle. If this is the case PTM shall remain in Safe state during 2 Seconds  counted by FSM_Error_Reaction_Reaction_Timeout counter. ,functional_requirement,project_accepted,  ,ASIL A
+SWR_ERM_133,2.1.2.2.0-2 Once the 2 seconds timer FSM_Error_Reaction_Reaction_Timeout counter expires  and if no microfaults are present  Error Reaction Manager shall exist safe state mode and return to normal operation.,functional_requirement,project_accepted,,ASIL A
+SWR_ERM_56,2.1.2.2.0-3 FSM fault bit errors on FSM_Error_Reaction_NonInitRAM_Error shall not be lost over RESET cycles so that FSM error reactions can be determined at SW initialization. ,functional_requirement,project_accepted,,ASIL A
+SWR_ERM_90,2.1.2.2.0-4 On each SW initialization  the 2 second counter FSM_Error_Reaction_Reaction_Timeout will be refreshed to count down from 2 seconds before returning to normal operation. During those 2 seconds the PTM shall remain in safe state.    Note: 2 second timeout counter only applies for micro faults.,functional_requirement,project_accepted,,ASIL A
+SWR_ERM_91,2.1.2.2.0-5 The 2 second counter FSM_Error_Reaction_Reaction_Timeout shall not be maintained over reset cycles.  Note: 2 second timeout counter only applies for micro faults.,functional_requirement,project_accepted,,ASIL A
+SWR_ERM_57,2.1.2.2.0-6 In case that an error was detected previous the reset was not solved  the error reaction manager will react according to the failure repeating this process in the next initialization.  Note: This only applies for micro faults.,functional_requirement,project_accepted,,ASIL A
+SWR_ERM_128,2.1.2.2.0-7 The 2 second timeout counter shall be managed by a main recovery task of 10 ms.,architectural_element,project_accepted,,ASIL A
+SWR_ERM_94,2.1.2.3 Error Reaction for faults of type Recoverable,heading,N/A,,N/A
+SWR_ERM_99,2.1.2.3.0-1 When an error with reaction of type Reaction_Recoverable is set  FSM_Error_Reaction_Manager shall write the error stored in shadow RAM to NvM.,functional_requirement,project_accepted,,ASIL A
+SWR_ERM_100,2.1.2.3.0-2 FSM_Error_Reaction_Manager shall notify NvM_Supervisor that a write to NvM for Error Reaction Error Bits block shall be performed.,functional_requirement,project_accepted,,ASIL A
+SWR_ERM_125,2.1.2.3.0-3 The 2 seconds timeout counter FSM_Error_Reaction_Reaction_Timeout shall be set to 0.,functional_requirement,project_accepted,,ASIL A
+SWR_ERM_126,2.1.2.3.0-4 FSM_Error_Reaction_Manager shall set safe state for both safety guards through command CMD_RESET to safety arbitrator.,functional_requirement,project_accepted,,ASIL A
+SWR_ERM_127,2.1.2.3.0-5 Once Safe State is set  Error Reaction Manager shall command an Mcu reset.,functional_requirement,project_accepted,,ASIL A
+SWR_ERM_129,2.1.2.4 Error Reaction for faults of type Recoverable no reset,heading,N/A,,N/A
+SWR_ERM_130,2.1.2.4.0-1 When an error with reaction of type Reaction_Recoverable_No_Reset is set  it shall be treated by the FSM component which set it and then  clear the error bit by using the interface:  FSM_Clear_Error_Reaction_Recoverable_No_Reset(),architectural_element,project_accepted,,ASIL A
+SWR_ERM_131,2.1.2.5 Error Reaction for faults of type Recoverable SWP reset,heading,N/A,,N/A
+SWR_ERM_132,2.1.2.5.0-1 When an error with reaction of type Reaction_Recoverable_SWP_Reset is set  FSM_Error_Reaction_Manager shall set the FSM_Error_Reaction_Reaction_Timeout counter to count 2 seconds  until reset is done by SW platform.,functional_requirement,project_accepted,,N/A
+SWR_ERM_95,2.1.3 FSM_Error_Reaction_Manager outputs,heading,N/A,,N/A
+SWR_ERM_116,2.1.3.0-1 FSM_Error_Reaction_Manager shall write the shadow RAM error variable on NvM block FSM_Error_ReaactionErrorBits via interface:  NvM_WriteBlock(),architectural_element,project_accepted,,ASIL A
+SWR_ERM_117,2.1.3.0-2 FSM_Error_Reaction_Manager shall notify NvM_Supervisor that a write to NvM for Error Reaction Fault Instance block shall be performed using the interface:  FSM_NvmSupv_Commit_to_NVM(),architectural_element,project_accepted,,ASIL A
+SWR_ERM_101,2.1.3.0-3 Error history counters on NvM Shadow RAM shall be written to NvM block FSM_Error_Reaction_History_Counters via interface:  NvM_WriteBlock(),architectural_element,project_accepted,,ASIL A
+SWR_ERM_102,2.1.3.0-4 FSM_Error_Reaction_Manager shall notify NvM_Supervisor that a write to NvM for Error Reaction History Counters block shall be performed using the interface:  FSM_NvmSupv_Commit_to_NVM(),architectural_element,project_accepted,,ASIL A
+SWR_ERM_111,2.1.3.0-5 Error Reaction Manager shall command Safety Arbitrator to E_FSMSAFETYGUARD_GHOST_DRIVER_CMD_RESET via interface FsmSafetyGuard1F_Latch_Ghost_Driver_Cmd() to LOW/RESET to set safe state for safety guard 1.,architectural_element,project_accepted,,ASIL A
+SWR_ERM_112,2.1.3.0-6 PTM shall command Safety Arbitrator to E_FSMSAFETYGUARD_GHOST_DRIVER_CMD_NORMAL_OPERTION via interface FsmSafetyGuard1F_Latch_Ghost_Driver_Cmd() to NORMAL to clear safe state for safety guard 1.,architectural_element,project_accepted,,ASIL A
+SWR_ERM_113,2.1.3.0-7 Error Reaction Manager shall command Safety Arbitrator to E_FSMSAFETYGUARD_GHOST_DRIVER_CMD_RESET via interface  FsmSafetyGuard2F_Spindle_Ghost_Driver_Cmd() to LOW/RESET to set safe state for safety guard 2.,architectural_element,project_accepted,,ASIL A
+SWR_ERM_114,2.1.3.0-8 PTM shall command Safety Arbitrator to E_FSMSAFETYGUARD_GHOST_DRIVER_CMD_NORMAL_OPERTION via interface FsmSafetyGuard2F_Spindle_Ghost_Driver_Cmd() to NORMAL to clear safe state for safety guard 2.,architectural_element,project_accepted,,ASIL A
+SWR_ERM_20,2.2 Diagnosis,heading,N/A,,N/A
+SWR_ERM_21,2.2.0-1 <The complete diagnosis for SW shall be described in this chapter.> ,comment,N/A,,N/A
+SWR_ERM_22,2.2.1 General description,heading,N/A,,N/A
+SWR_ERM_23,2.2.2 Diagnosis Function 1..n,heading,N/A,,N/A
+SWR_ERM_24,2.2.3 Diagnostic services,heading,N/A,,N/A
+SWR_ERM_53,2.2.3-1 FSM_Error_Reaction_NonInitRAM_Error and FSM_Error_Reaction_NonInitRAM_Error_History_Count shall be readable by Diagnostic Service 22 Read Parameters.    Note: Error History counters shall be maintained over RESET cycles so data can eventaually make it into NVM.,functional_requirement,project_accepted,,ASIL A
+SWR_ERM_27,2.2.4 Behavior of the diagnosis in case of reset,heading,N/A,,N/A
+SWR_ERM_28,2.2.5 Robustness,heading,N/A,,N/A
+SWR_ERM_29,2.2.6 Failures detection,heading,N/A,,N/A
+SWR_ERM_30,2.2.7 Management of DTC's,heading,N/A,,N/A

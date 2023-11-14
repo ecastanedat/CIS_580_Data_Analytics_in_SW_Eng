@@ -72,14 +72,21 @@ def search_word_in_file(file_path, target_word):
         with open(file_path, 'r') as file:
             for line_number, line in enumerate(file, start=1):
                 if target_word in line:
-                    print(f"Found '{target_word}' on line {line_number}: {line.strip()}")
-                    thislist.append(f"Found '{target_word}' on line {line_number}: {line.strip()}\n")
+                    #print(f"Found '{target_word}' on line {line_number}: {line.strip()}")
+                    #thislist.append(f"Found '{target_word}' on line {line_number}: {line.strip()}\n")
+                    thislist.append(target_word)
+                    thislist.append(file_path)
+                    thislist.append(str(line_number))
+                    thislist.append(line.strip())
     except FileNotFoundError:
         print(f"Error: File '{file_path}' not found.")
     except Exception as e:
         print(f"An error occurred: {e}")
 
+    #print(thislist)
+
     return thislist
+
 
 def main():
     file_path = 'D:\\DSUsers\\uib01493\\000_SD_Card\\009_Projects\\CIS_580\\Dependencies\\CAN_Wrapper_test.c.test'
@@ -87,10 +94,6 @@ def main():
     
     original_sentence = 'TS_CAN_173'
     filtered_sentence = remove_stopwords(original_sentence)
-
-    #search_word_in_file(file_path, target_word)
-    #print("Original Sentence:", original_sentence)
-    #print("Filtered Sentence:", filtered_sentence)
 
     lst = nltk.word_tokenize(filtered_sentence)
 
