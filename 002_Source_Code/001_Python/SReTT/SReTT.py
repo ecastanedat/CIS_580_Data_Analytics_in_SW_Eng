@@ -1,3 +1,28 @@
+'''
+/*============================================================================*/
+/*                        I BS SOFTWARE GROUP                                 */
+/*============================================================================*/
+/*                        OBJECT SPECIFICATION                                */
+/*============================================================================*/
+/*
+ * $Source: SReTT.py $
+ * $Revision: 0.9$
+ * $Author: LCastaneda $
+ * $Date: Nov 18, 2023 10:44:23 AM$
+ */
+/*============================================================================*/
+/* COPYRIGHT (C) CONTINENTAL AUTOMOTIVE 2023                                  */
+/* AUTOMOTIVE GROUP, Interior Division, Body and Security                     */
+/* ALL RIGHTS RESERVED                                                        */
+/*                                                                            */
+/* The reproduction, transmission, or use of this document or its content is  */
+/* not permitted without express written authority. Offenders will be liable  */
+/* for damages.                                                               */
+/* All rights, including rights created by patent grant or registration of a  */
+/* utility model or design, are reserved.                                     */
+/*                                                                            */
+/*============================================================================*/
+'''
 import sys
 import pandas as pd
 import nltk
@@ -7,8 +32,8 @@ import re
 import string
 
 print('============================================================================')
-print('                              SReTT v0.1                                    ')
-print(' This is a demo that only prints the passed arguments from the command line.')
+print('                              SReTT v0.9                                    ')
+print('                CIS 580 Data Analytics in SW Engineering.                   ')
 print('============================================================================')
 
 nltk.download('stopwords')
@@ -20,6 +45,9 @@ nltk.download('omw-1.4')
 for arg in sys.argv:
     print(arg)
 
+'''
+This section will be used for future implementation in Command Line execution
+'''
 def get_synonyms(word):
     synonyms = []
     for syn in wordnet.synsets(word):
@@ -27,11 +55,17 @@ def get_synonyms(word):
             synonyms.append(lemma.name())
     return synonyms
 
+'''
+This section will be used for future implementation in Command Line execution
+'''
 def remove_known_words(lst):
     words_to_remove = ['Error', 'set', 'error']
 
     return [word for word in lst if word not in words_to_remove]
 
+'''
+This section will be used for future implementation in Command Line execution
+'''
 def remove_punctuation(sentence):
     # Define a translation table to remove punctuation
     translator = str.maketrans('', '', string.punctuation)
@@ -41,9 +75,10 @@ def remove_punctuation(sentence):
 
     return cleaned_sentence
 
+'''
+This section will be used for future implementation in Command Line execution
+'''
 def remove_stopwords(sentence):
-
-    #sentence = remove_punctuation(sentence)
 
     # Use a regular expression to match and remove newline characters
     cleaned_sentence = re.sub(r'\n', ' ', sentence)
@@ -65,6 +100,12 @@ def remove_stopwords(sentence):
 
     return filtered_sentence
 
+'''
+Function: search_word_in_file
+Parameters: file_path and target_word
+Description: Searches a target_word in the file_path and returns the results in a
+             list form.
+'''
 def search_word_in_file(file_path, target_word):
     thislist = []
 
@@ -72,8 +113,6 @@ def search_word_in_file(file_path, target_word):
         with open(file_path, 'r') as file:
             for line_number, line in enumerate(file, start=1):
                 if target_word in line:
-                    #print(f"Found '{target_word}' on line {line_number}: {line.strip()}")
-                    #thislist.append(f"Found '{target_word}' on line {line_number}: {line.strip()}\n")
                     thislist.append(target_word)
                     thislist.append(file_path)
                     thislist.append(str(line_number))
@@ -83,11 +122,12 @@ def search_word_in_file(file_path, target_word):
     except Exception as e:
         print(f"An error occurred: {e}")
 
-    #print(thislist)
-
     return thislist
 
 
+'''
+This section will be used for future implementation in Command Line execution
+'''
 def main():
     file_path = 'D:\\DSUsers\\uib01493\\000_SD_Card\\009_Projects\\CIS_580\\Dependencies\\CAN_Wrapper_test.c.test'
     target_word = 'FSM_Error_Reaction_Init'
