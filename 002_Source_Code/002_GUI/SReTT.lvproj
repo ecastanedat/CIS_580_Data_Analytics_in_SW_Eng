@@ -127,7 +127,7 @@
 				<Property Name="Bld_localDestDirType" Type="Str">relativeToProject</Property>
 				<Property Name="Bld_modifyLibraryFile" Type="Bool">true</Property>
 				<Property Name="Bld_previewCacheID" Type="Str">{1F3981CA-D98A-4A5A-AFA5-75C30A02715B}</Property>
-				<Property Name="Bld_version.build" Type="Int">42</Property>
+				<Property Name="Bld_version.build" Type="Int">44</Property>
 				<Property Name="Bld_version.major" Type="Int">1</Property>
 				<Property Name="Destination[0].destName" Type="Str">SReTT.exe</Property>
 				<Property Name="Destination[0].path" Type="Path">../001_Builds/NI_AB_PROJECTNAME/SReTT.exe</Property>
@@ -138,7 +138,7 @@
 				<Property Name="Destination[1].path" Type="Path">../001_Builds/NI_AB_PROJECTNAME/data</Property>
 				<Property Name="Destination[1].path.type" Type="Str">relativeToProject</Property>
 				<Property Name="DestinationCount" Type="Int">2</Property>
-				<Property Name="Source[0].itemID" Type="Str">{A330211D-74C2-4E88-A713-BC5D74A86F12}</Property>
+				<Property Name="Source[0].itemID" Type="Str">{0D0F6F06-276E-4A90-BCC8-F98DAA4F72CE}</Property>
 				<Property Name="Source[0].type" Type="Str">Container</Property>
 				<Property Name="Source[1].destinationIndex" Type="Int">0</Property>
 				<Property Name="Source[1].itemID" Type="Ref">/My Computer/Launcher.vi</Property>

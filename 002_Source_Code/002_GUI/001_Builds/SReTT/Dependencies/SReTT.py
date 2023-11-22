@@ -114,13 +114,22 @@ def search_word_in_file(file_path, target_word):
             for line_number, line in enumerate(file, start=1):
                 if target_word in line:
                     thislist.append(target_word)
+                    thislist.append('Yes')
                     thislist.append(file_path)
                     thislist.append(str(line_number))
                     thislist.append(line.strip())
+
     except FileNotFoundError:
         print(f"Error: File '{file_path}' not found.")
     except Exception as e:
         print(f"An error occurred: {e}")
+
+    if not thislist:
+        thislist.append(target_word)
+        thislist.append('No')
+        thislist.append(file_path)
+        thislist.append('NA')
+        thislist.append('NA')
 
     return thislist
 

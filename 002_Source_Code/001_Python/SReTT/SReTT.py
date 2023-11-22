@@ -114,13 +114,22 @@ def search_word_in_file(file_path, target_word):
             for line_number, line in enumerate(file, start=1):
                 if target_word in line:
                     thislist.append(target_word)
+                    thislist.append('Yes')
                     thislist.append(file_path)
                     thislist.append(str(line_number))
                     thislist.append(line.strip())
+
     except FileNotFoundError:
         print(f"Error: File '{file_path}' not found.")
     except Exception as e:
         print(f"An error occurred: {e}")
+
+    if not thislist:
+        thislist.append(target_word)
+        thislist.append('No')
+        thislist.append(file_path)
+        thislist.append('NA')
+        thislist.append('NA')
 
     return thislist
 
@@ -130,21 +139,9 @@ This section will be used for future implementation in Command Line execution
 '''
 def main():
     file_path = 'D:\\DSUsers\\uib01493\\000_SD_Card\\009_Projects\\CIS_580\\Dependencies\\CAN_Wrapper_test.c.test'
-    target_word = 'FSM_Error_Reaction_Init'
-    
-    original_sentence = 'TS_CAN_173'
-    filtered_sentence = remove_stopwords(original_sentence)
+    target_word = 'TS_CAN_173'
 
-    lst = nltk.word_tokenize(filtered_sentence)
-
-    print(lst)
-
-    for word in lst:
-        synonyms = get_synonyms(word)
-        synonyms.insert(0, word)
-        #print(synonyms)
-        for word in synonyms:
-            search_word_in_file(file_path, word)
+    search_word_in_file(file_path, target_word)
 
 
 if __name__ == "__main__":
